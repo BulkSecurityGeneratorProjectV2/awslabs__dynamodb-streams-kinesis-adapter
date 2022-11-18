@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -90,7 +91,7 @@ public class KinesisLocalFileDataCreator {
      */
     public static File generateTempDataFile(List<Shard> shardList, int numRecordsPerShard, String fileNamePrefix)
         throws IOException {
-        File file = File.createTempFile(fileNamePrefix, FILE_NAME_SUFFIX);
+        File file = Files.createTempFile(fileNamePrefix, FILE_NAME_SUFFIX).toFile();
         try (BufferedWriter fileWriter = new BufferedWriter(
             new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
             ObjectMapper objectMapper = new ObjectMapper();
